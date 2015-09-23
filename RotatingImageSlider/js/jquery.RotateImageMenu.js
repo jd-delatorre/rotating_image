@@ -139,10 +139,8 @@ $(function() {
 								//for IE <= 8 we will not rotate, but fade out / fade in ... 
 								//better than nothing :)	
 								if(!ieLte8)
-									$other.css({
-										rotate	: otherRotation,
-										origin	: origin
-									});
+									$other.css('transform', 'rotate(' + otherRotation + ')');
+									$other.css('transform-origin', '155px 930px 0px');
 								
 								(dir === 1) ? ++current : --current;
 								
@@ -154,7 +152,7 @@ $(function() {
 								
 								if(!ieLte8) {
 									$img.animate({
-										rotate	: rotateTo
+										transform	: 'rotate(' + rotateTo + ')'
 									}, 1200, function(){
 										$(this).remove();
 										++completed;
@@ -164,7 +162,7 @@ $(function() {
 										}
 									});
 									$other.animate({
-										rotate	: '0deg'
+										transform	: 'rotate(0deg)'
 									}, 600);
 								}
 								else {
@@ -195,17 +193,17 @@ $(function() {
 						var $item = $(this).data('current', 1);
 						
 						if(!ieLte8)
-						$item.transform({rotate: $item.data('rotation') + 'deg'})
-							 .find('img')
-							 .transform({origin: origin});
+						$item.animate({transform: 'rotate(' + jitem.data("rotation") + 'deg)'})
+							.find('img')
+							.css('transform-origin', '155px 930px 0px');
 					});
 				},
 				//rotates the masks and corners
 				rotateMaskCorners	= function() {
-					$rm_mask_left.transform({rotate: '-3deg'});
-					$rm_mask_right.transform({rotate: '3deg'});
-					$rm_corner_left.transform({rotate: '45deg'});
-					$rm_corner_right.transform({rotate: '-45deg'});
+					$rm_mask_left.animate({transform: 'rotate(-3deg)'});
+					$rm_mask_right.animate({transform: 'rotate(3deg)'});
+					$rm_corner_left.animate({transform: 'rotate(45deg)'});
+					$rm_corner_right.animate({transform: 'rotate(-45deg)'});
 				},
 				//hides the masks and corners
 				hideMaskCorners		= function() {
